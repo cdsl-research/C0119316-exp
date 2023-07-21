@@ -13,6 +13,8 @@ WORKDIR /root
 
 COPY --from=BUILDING /root/dhcp-4.4.3-P1/server/dhcpd /root/dhcpd
 
-# TODO: add options, pre-run scripts.
+RUN mkdir /var/lib/dhcp && touch /var/lib/dhcp/dhcpd.leases \
+    chown root:dhcpd /var/lib/dhcp /var/lib/dhcp/dhcpd.leases && \
+    chmod 775 /var/lib/dhcp && chmod 664 /var/lib/dhcp/dhcpd.leases; \
 
-CMD ["dhcpd"]
+CMD ["dhcpd", "-user", "dhcpd", "-group", "dhcpd", "-f", "-4", "-pf", "/run/dhcp-server/dhcpd.pid", "-cf", "/etc/dhcp/dhcpd.conf"]

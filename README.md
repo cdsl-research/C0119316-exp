@@ -1,6 +1,6 @@
 ## Description
 
-Create ISC DHCP (4.4.3-P1) for the container.
+Create ISC DHCP (4.4.3-P1) container.
 This is for my experiments.
 
 ## Usage
