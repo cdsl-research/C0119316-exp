@@ -18,4 +18,6 @@ RUN useradd -U dhcpd && \
     chown root:dhcpd /var/lib/dhcp /var/lib/dhcp/dhcpd.leases && \
     chmod 775 /var/lib/dhcp && chmod 664 /var/lib/dhcp/dhcpd.leases
 
-CMD ["dhcpd", "-user", "dhcpd", "-group", "dhcpd", "-f", "-4", "-pf", "/run/dhcp-server/dhcpd.pid", "-cf", "/etc/dhcp/dhcpd.conf"]
+USER dhcpd
+
+CMD ["./dhcpd", "-f", "-4", "-pf", "/run/dhcp-server/dhcpd.pid", "-cf", "/etc/dhcp/dhcpd.conf", "-lf", "/var/lib/dhcp/dhcpd.leases"]
