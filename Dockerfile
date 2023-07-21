@@ -4,7 +4,7 @@ WORKDIR /root
 
 RUN apt update && apt install -y wget make gcc && \
     wget https://downloads.isc.org/isc/dhcp/4.4.3-P1/dhcp-4.4.3-P1.tar.gz && \
-    tar xzvf dhcp-4.4.3-P1.tar.gz && cd dhcp-4.4.3-P1 \
+    tar xzf dhcp-4.4.3-P1.tar.gz && cd dhcp-4.4.3-P1 && \
     ./configure && make
 
 FROM debian:bookworm-slim AS RUNNING
