@@ -15,6 +15,7 @@ COPY --from=BUILDING /root/dhcp-4.4.3-P1/server/dhcpd /root/dhcpd
 
 RUN useradd -U dhcpd && \
     mkdir -p /var/lib/dhcp && touch /var/lib/dhcp/dhcpd.leases && \
+    mkdir -p /etc/dhcp && touch /etc/dhcp/dhcp.conf && \
     chown root:dhcpd /var/lib/dhcp /var/lib/dhcp/dhcpd.leases && \
     chmod 775 /var/lib/dhcp && chmod 664 /var/lib/dhcp/dhcpd.leases
 
