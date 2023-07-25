@@ -13,12 +13,9 @@ WORKDIR /root
 
 COPY --from=BUILDING /root/dhcp-4.4.3-P1/server/dhcpd /root/dhcpd
 
-RUN useradd -U dhcpd && \
-    mkdir -p /var/lib/dhcp && touch /var/lib/dhcp/dhcpd.leases && \
+RUN mkdir -p /var/lib/dhcp && touch /var/lib/dhcp/dhcpd.leases && \
     mkdir -p /etc/dhcp && touch /etc/dhcp/dhcpd.conf && \
-    chown root:dhcpd /var/lib/dhcp /var/lib/dhcp/dhcpd.leases && \
+    mkdir -p /run/dhcp-server && touch /run/dhcp-server/dhcp.pid && \
     chmod 775 /var/lib/dhcp && chmod 664 /var/lib/dhcp/dhcpd.leases
-
-USER dhcpd
 
 CMD ["./dhcpd", "-f", "-4", "-pf", "/run/dhcp-server/dhcpd.pid", "-cf", "/etc/dhcp/dhcpd.conf", "-lf", "/var/lib/dhcp/dhcpd.leases"]
