@@ -18,4 +18,4 @@ RUN mkdir -p /var/lib/dhcp && touch /var/lib/dhcp/dhcpd.leases && \
     mkdir -p /run/dhcp-server && touch /run/dhcp-server/dhcp.pid && \
     chmod 775 /var/lib/dhcp && chmod 664 /var/lib/dhcp/dhcpd.leases
 
-CMD ["./dhcpd", "-f", "-4", "-pf", "/run/dhcp-server/dhcpd.pid", "-cf", "/etc/dhcp/dhcpd.conf", "-lf", "/var/lib/dhcp/dhcpd.leases"]
+ENTRYPOINT ["./dhcpd", "-f", "-4", "-pf", "/run/dhcp-server/dhcpd.pid", "-cf", "/etc/dhcp/dhcpd.conf", "-lf", "/var/lib/dhcp/dhcpd.leases"]
