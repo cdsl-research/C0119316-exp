@@ -20,5 +20,5 @@ $ docker build -t <name> .
 Run:
 
 ```sh
-$ docker run --rm -itd --name <container_name> -v /path/to/dhcpd.conf:/etc/dhcp/dhcpd.conf -p 67:67 -p 68:68 <name>
+$ docker run --rm -d --name <container_name> -v /path/to/dhcpd.conf:/etc/dhcp/dhcpd.conf -p 67:67 -p 68:68 <name>
 ```
