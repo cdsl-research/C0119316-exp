@@ -2,7 +2,7 @@ FROM debian:bookworm-slim AS BUILDING
 
 WORKDIR /root
 
-RUN apt update && apt install -y wget make gcc && \
+RUN apt update && apt install -y wget make gcc file && \
     wget https://downloads.isc.org/isc/dhcp/4.4.3-P1/dhcp-4.4.3-P1.tar.gz && \
     tar xzf dhcp-4.4.3-P1.tar.gz && cd dhcp-4.4.3-P1 && \
     ./configure && make
