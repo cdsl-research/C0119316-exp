@@ -1,0 +1,44 @@
+diff --git a/includes/site.h b/includes/site.h
+index 533e762b..ed036fb4 100644
+--- a/includes/site.h
++++ b/includes/site.h
+@@ -294,7 +294,7 @@
+    situations.  We plan to revisit this feature and may
+    make non-backwards compatible changes including the
+    removal of this define.  Use at your own risk.  */
+-/* #define ENABLE_GENTLE_SHUTDOWN */
++#define ENABLE_GENTLE_SHUTDOWN 
+ 
+ /* Include old error codes.  This is provided in case you
+    are building an external program similar to omshell for
+diff --git a/server/dhcpd.c b/server/dhcpd.c
+index 3522889c..cb5ab749 100644
+--- a/server/dhcpd.c
++++ b/server/dhcpd.c
+@@ -42,6 +42,7 @@ static const char url [] =
+ #include <sys/types.h>
+ #include <sys/time.h>
+ #include <isc/file.h>
++#include <time.h>
+ 
+ #if defined (PARANOIA)
+ #  include <sys/types.h>
+@@ -250,6 +251,9 @@ static void setup_chroot (char *chroot_dir) {
+ 
+ int
+ main(int argc, char **argv) {
++    struct timespec ts;
++    clock_gettime(CLOCK_MONOTONIC, &ts);
++    printf("before boot: tv_sec = %ld, tv_nsec = %ld\n", ts.tv_sec, ts.tv_nsec);
+ 	int fd;
+ 	int i, status;
+ 	struct servent *ent;
+@@ -1057,6 +1061,8 @@ main(int argc, char **argv) {
+ 	/* Log that we are about to start working */
+ 	log_info("Server starting service.");
+ 
++    clock_gettime(CLOCK_MONOTONIC, &ts);
++    printf("after boot: tv_sec = %ld, tv_nsec = %ld\n", ts.tv_sec, ts.tv_nsec);
+ 	/*
+ 	 * Receive packets and dispatch them...
+ 	 * dispatch() will never return.
